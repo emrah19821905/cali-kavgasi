@@ -341,7 +341,7 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback,
         c.drawRect(e.x - 19, e.y - 29, e.x - 19 + 38f * e.hp / e.maxHp, e.y - 25, pt)
     }
 
-    private fun draw(c: Canvas) {
+    private fun render(c: Canvas) {
         val w = width.toFloat(); val h = height.toFloat()
         c.drawColor(0xFF14281D.toInt())
         val s = (min(w, h) / dn / 480f).coerceIn(.7f, 1.3f) * dn
@@ -544,7 +544,7 @@ class GameView(context: Context) : SurfaceView(context), SurfaceHolder.Callback,
             if (state == S.PLAY) update(dt)
             val c = try { holder.lockCanvas() } catch (ex: Exception) { null }
             if (c == null) { Thread.sleep(10); continue }
-            try { draw(c) } finally { holder.unlockCanvasAndPost(c) }
+            try { render(c) } finally { holder.unlockCanvasAndPost(c) }
         }
     }
 
